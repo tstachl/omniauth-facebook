@@ -56,7 +56,10 @@ module OmniAuth
       end
       
       def raw_info
-        @raw_info ||= signed_request.merge ccess_token.get('/me').parsed
+        @raw_info ||= begin 
+          sr = signed_request
+          sr.merge!(access_token.get('/me').parsed)
+        end
       end
 
       def build_access_token
