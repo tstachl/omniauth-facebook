@@ -95,7 +95,7 @@ module OmniAuth
 
       def signed_request
         @signed_request ||= begin
-          cookie = request.cookies["fbsr_#{client.id}"] and
+          cookie = request.cookies["fbsr_#{client.id}"] || request.params[:signed_request] and
           parse_signed_request(cookie)
         end
       end
